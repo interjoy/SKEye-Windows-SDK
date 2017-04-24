@@ -11,15 +11,15 @@ using namespace std;
 //数据初始化
 __declspec(dllexport) void SKEyeSDK_Init(char *_Api_Key, char *_Api_Secret);
 //Url访问 图片路径访问
-__declspec(dllexport) char *SKEyeSDK_ImagePath(char *UrlOrPath, char *service_group);
+__declspec(dllexport) char *SKEyeSDK_ImagePath(char *UrlOrPath, char *service_name);
 //图片+宽+高访问
-__declspec(dllexport) char *SKEyeSDK_Image(unsigned char *ImageData, unsigned int Wide, unsigned int Hight, char *service_group);
+__declspec(dllexport) char *SKEyeSDK_Image(unsigned char *ImageData, unsigned int Wide, unsigned int Hight, char *service_name);
 
 
 
 typedef void (*CallBackJson)(char *JsonData);
 //Url访问 图片路径访问 回调方式
-__declspec(dllexport) void SKEyeSDK_ImagePath(char *Url, char *service_group, CallBackJson _CallBackJson);
+__declspec(dllexport) void SKEyeSDK_ImagePath(char *Url, char *service_name, CallBackJson _CallBackJson);
 //图片+宽+高访问 回调方式
-__declspec(dllexport) void SKEyeSDK_Image(unsigned char *ImageData, unsigned int Wide, unsigned int Hight, char *service_group, CallBackJson _CallBackJson);
+__declspec(dllexport) void SKEyeSDK_Image(unsigned char *ImageData, unsigned int Wide, unsigned int Hight, char *service_name, CallBackJson _CallBackJson);
 #endif
