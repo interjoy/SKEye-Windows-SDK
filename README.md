@@ -27,8 +27,8 @@ char PATH[1024] = "object3.jpg";
 char  *JsonData;
 int With,Height;
 unsigned char *data;
- //ReadBmp函数读取bmp图片返回的data是BGR、倒立、无行对齐 unsigned char *型数据
-if (!(data=ReadBmp("4.bmp", data,With,Height)))
+ //ReadBmp函数读取bmp图片,data是BGR、倒立、无行对齐 unsigned char *型数据
+if (!ReadBmp("4.bmp", data,With,Height))
 {
 	printf("Open is error\n");
 	return 0;
