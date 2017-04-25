@@ -15,6 +15,17 @@ v1.0.0
 - 更多使用介绍请参考 [《SKEye-Windows-SDK说明文档V1.0.0》](https://github.com/interjoy/SKEye-Windows-SDK/blob/master/SKEye-Windows-SDK%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3V1.0.0.pdf)。
 ###  调用示例
 ```
+bool ReadBmp(char *filename, unsigned char *data)
+{
+	FILE *fp;
+	fp = fopen(filename, "rb");
+	if (fp == NULL) return false;
+	fseek(fp, 54, SEEK_SET);
+	int rlen = fread(data, 1, 640 * 480 * 3, fp);
+	if (rlen != 640 * 480 * 3) return false;
+	fclose(fp);
+	return true;
+}
 void _JsonData(char *JsonData)
 {
     printf("%s\n",JsonData);
@@ -25,11 +36,21 @@ char Image_Url[] = "http://pic.58pic.com/58pic/12/92/83/39j58PIChF6.jpg";
 char service_name[] = "objects";
 char PATH[1024] = "object3.jpg";
 char  *JsonData;
+unsigned char *data = new unsigned char[640 * 480 * 3];
+if (!ReadBmp("4.bmp", data)) //读取图片
+{
+	printf("Open is error\n");
+	return 0;
+}
 SKEyeSDK_Init(Api_Key, Api_Secret);
-//URL/路径
+//路径
 JsonData = SKEyeSDK_ImagePath(PATH, service_name);
-//URL/路径(回调)
+//URL
+JsonData = SKEyeSDK_ImagePath(Image_Url, service_name);
+//路径(回调)
 SKEyeSDK_ImagePath(PATH, service_name, _JsonData);
+//URL(回调)
+SKEyeSDK_ImagePath(Image_Url, service_name, _JsonData);
 //rgb 
 JsonData = SKEyeSDK_Image(data, With, Height, service_name);
 //rgb 回调
