@@ -30,4 +30,4 @@ JsonData = SKEyeSDK_Image(data, With, Height, service_name);
 SKEyeSDK_Image(data, With, Height, service_name, _JsonData);
 ```
 ###  SDK问题反馈
-- SKEye开放平台用户群：617518775
+- SKEye开放平台QQ群：617518775
