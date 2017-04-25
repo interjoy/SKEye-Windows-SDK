@@ -12,11 +12,7 @@ v1.0.0
 - 将x64或x86下的lib、dll文件加载到vs工程下，并包含头文件"head.h"。
 - 将资源文件resources下的图片放入对应的路径下。
 - 运行代码。
-<<<<<<< HEAD
-- 更多使用介绍请参考 [《SKEye-Windows-SDK说明文档V1.0.0》](https://github.com/interjoy/SKEye-Windows-SDK/blob/master/SKEye-WINDOWS-SDK%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3V1.0.0.pdf)。
-=======
 - 更多使用介绍请参考 [《SKEye-Windows-SDK说明文档V1.0.0》](https://github.com/interjoy/SKEye-Windows-SDK/blob/master/SKEye-Windows-SDK%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3V1.0.0.pdf)。
->>>>>>> a6f339469f7992176b69ad4faa9119fd003d46cb
 ###  调用示例
 ```
 bool ReadBmp(char *filename, unsigned char *data)
