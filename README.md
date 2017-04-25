@@ -8,7 +8,11 @@ v1.0.0
 - SKEyeSDKDemo:物体识别的demo(main.cpp)、资源文件resources(包含demo的图片)。
 - 说明文档(SKEye-WINDOWS-SDK说明文档V1.0.0.pdf)
 ###  使用步骤
-
+- 下载SDK文件包。
+- 将x64或x86下的lib、dll文件加载到vs工程下，并包含头文件"head.h"。
+- 将资源文件resources下的图片放入对应的路径下。
+- 运行代码。
+- 更多介绍请参考 [《SKEye-WINDOWS-SDK说明文档V1.0.0》](https://github.com/interjoy/SKEye-Windows-SDK/blob/master/SKEye-WINDOWS-SDK%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3V1.0.0.pdf)。
 ###  调用示例
 ```
 void _JsonData(char *JsonData)
