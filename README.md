@@ -7,6 +7,8 @@ v1.0.0
 - libs:include包含的头文件,x64、x86下的lib、dll文件。
 - SKEyeSDKDemo:物体识别的demo(main.cpp)、资源文件resources(包含demo的图片)。
 - 说明文档(SKEye-WINDOWS-SDK说明文档V1.0.0.pdf)
+###  使用步骤
+
 ###  调用示例
 ```
 void _JsonData(char *JsonData)
