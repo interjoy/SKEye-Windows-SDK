@@ -52,7 +52,7 @@ int main()
 {
 	char Api_Key[] = "942f4dea3b45def10552360de80dd17a";
 	char Api_Secret[] = "282e42c53058b0b08253e60cad0746c2";
-	char Image_Url[] = "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=444806911,2342807153&fm=23&gp=0.jpg";
+	char Image_Url[] = "http://pic.58pic.com/58pic/12/92/83/39j58PIChF6.jpg";
 	char service_name[] = "objects";
 	char PATH[1024] = "object3.jpg";
 	SKEyeSDK_Init(Api_Key, Api_Secret);
