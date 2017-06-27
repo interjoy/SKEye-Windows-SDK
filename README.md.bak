@@ -49,6 +49,7 @@ void ImageCallBackDemoFuntion()
 	//Image的本地绝对路径
 	char ImageLocalPath[] = "4.bmp";
 	char ServiceName[] = "objects";
+	//图片处理函数
 	unsigned int ImageWidth, ImageHeight;
 	unsigned char *ImageData = NULL;
 	//得到处理后的图片数据ImageData

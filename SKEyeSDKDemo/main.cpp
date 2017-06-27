@@ -8,7 +8,7 @@ void CallBackImageResultFunction(char *ImageResult)
 	//这里添加代码
 	printf("%s\n", ImageResult);
 }
-//将图像转成BGR、倒立、无行对齐位数据格式图像
+//将图像转成BGR、倒立、无行对齐位数据格式
 int GetImageData(const char *ImagePath, unsigned char *&ImageData, unsigned int &ImageWidth, unsigned int &ImageHeight)
 {
 	CxImage Image;
@@ -30,7 +30,6 @@ void ImageCallBackDemoFuntion()
 	//Image的本地绝对路径
 	char ImageLocalPath[] = "4.bmp";
 	char ServiceName[] = "objects";
-	//图片处理函数
 	unsigned int ImageWidth, ImageHeight;
 	unsigned char *ImageData = NULL;
 	//得到处理后的图片数据ImageData
