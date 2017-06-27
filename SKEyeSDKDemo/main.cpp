@@ -1,65 +1,124 @@
 #include <iostream>
-#include "Head.h"
-void _JsonData(char *JsonData)
+#include "LibFile.h"
+#include <atlimage.h>
+#include "ximage.h"
+//图片结果回调函数
+void CallBackImageResultFunction(char *ImageResult)
 {
-	printf("%s\n", JsonData);
+	//这里添加代码
+	printf("%s\n", ImageResult);
 }
-bool ReadBmp(char *filename, unsigned char *data)
+//将图像转成BGR、倒立、无行对齐位数据格式图像
+int GetImageData(const char *ImagePath, unsigned char *&ImageData, unsigned int &ImageWidth, unsigned int &ImageHeight)
 {
-	FILE *fp;
-	fp = fopen(filename, "rb");
-	if (fp == NULL) return false;
-	fseek(fp, 54, SEEK_SET);
-	int rlen = fread(data, 1, 640 * 480 * 3, fp);
-	if (rlen != 640 * 480 * 3) return false;
-	fclose(fp);
-	return true;
+	CxImage Image;
+	Image.Load(ImagePath);
+	ImageWidth = Image.GetWidth();
+	ImageHeight = Image.GetHeight();
+	int ImageBMPSize = 0;
+	unsigned char *ImageDataBuff = NULL;
+	if (!Image.Encode(ImageDataBuff, ImageBMPSize, CXIMAGE_SUPPORT_BMP))
+		return 0;
+	ImageData = new unsigned char[ImageBMPSize];
+	memcpy(ImageData, ImageDataBuff, ImageBMPSize);
+	Image.FreeMemory(ImageDataBuff);
+	return 1;
 }
-void SKEyeSDK_ImagePath_Function(char *PATH, char *service_name)
+//图像识别回调Demo
+void ImageCallBackDemoFuntion()
 {
-	char  *JsonData;
-	JsonData = SKEyeSDK_ImagePath(PATH, service_name);
-	printf("%s\n", JsonData);
-}
-void SKEyeSDK_ImagePath_CallBackFunction(char *PATH, char *service_name)
-{
-	SKEyeSDK_ImagePath(PATH, service_name, _JsonData);
-}
-void SKEyeSDK_Image_Function(int With, int Height, char *service_name)
-{
-	unsigned char *data = new unsigned char[640 * 480 * 3];
-	char *JsonData;
-	if (!ReadBmp("4.bmp", data)) //读取图片
+	//Image的本地绝对路径
+	char ImageLocalPath[] = "4.bmp";
+	char ServiceName[] = "objects";
+	//图片处理函数
+	unsigned int ImageWidth, ImageHeight;
+	unsigned char *ImageData = NULL;
+	//得到处理后的图片数据ImageData
+	if (!GetImageData(ImageLocalPath, ImageData, ImageWidth, ImageHeight))
 	{
-		printf("Open is error\n");
-		return ;
-	}
-	JsonData = SKEyeSDK_Image(data, With, Height, service_name);
-	printf("%s\n", JsonData);
-}
-void SKEyeSDK_Image_CallBackFunction(int With, int Height, char *service_name)
-{
-	unsigned char *data = new unsigned char[640 * 480 * 3];
-	char *JsonData;
-	if (!ReadBmp("4.bmp", data)) //读取图片
-	{
-		printf("Open is error\n");
+		printf("Get data failed\n");
 		return;
 	}
-	SKEyeSDK_Image(data, With, Height, service_name, _JsonData);
+	SKEyeSDK_Image(ImageData, ImageWidth, ImageHeight, ServiceName, CallBackImageResultFunction);
+	//需要外部释放
+	delete[] ImageData;
+}
+
+//Url回调Demo
+void UrlCallBackDemoFuntion()
+{
+	//图像url
+	char ImageUrl[] = "http://pic.58pic.com/58pic/12/92/83/39j58PIChF6.jpg";
+	//服务名
+	char ServiceName[] = "objects";
+	SKEyeSDK_ImagePath(ImageUrl, ServiceName, CallBackImageResultFunction);
+}
+//本地路径回调Demo
+void LocalCallBackDemoFuntion()
+{
+	//Image的本地绝对路径
+	char ImageLocalPath[] = "object3.jpg";
+	//服务名
+	char ServiceName[] = "objects";
+	SKEyeSDK_ImagePath(ImageLocalPath, ServiceName, CallBackImageResultFunction);
+}
+
+//本地路径Demo
+void LocalDemoFuntion()
+{
+	//Image的本地绝对路径
+	char ImageLocalPath[] = "object3.jpg";
+	//服务名
+	char ServiceName[] = "objects";
+	//图像识别结果
+	char  *ImageResult = SKEyeSDK_ImagePath(ImageLocalPath, ServiceName);
+	printf("%s\n", ImageResult);
+}
+//Url Demo
+void UrlDemoFuntion()
+{
+	//图像url
+	char ImageUrl[] = "http://pic.58pic.com/58pic/12/92/83/39j58PIChF6.jpg";
+	//服务名
+	char ServiceName[] = "objects";
+	//图片识别结果
+	char  *ImageResult =SKEyeSDK_ImagePath(ImageUrl, ServiceName);
+	printf("%s\n", ImageResult);
+}
+//图像识别Demo
+void ImageDemoFuntion()
+{
+	//Image的本地绝对路径
+	char ImageLocalPath[] = "4.bmp";
+	char ServiceName[] = "objects";
+	//图片处理函数
+	unsigned int ImageWidth, ImageHeight;
+	unsigned char *ImageData = NULL;
+	char *ImageResult = NULL;
+	//得到处理后的图片数据ImageData
+	GetImageData(ImageLocalPath, ImageData, ImageWidth, ImageHeight);
+	ImageResult = SKEyeSDK_Image(ImageData, ImageWidth, ImageHeight, ServiceName);
+	delete [] ImageData;
+	printf("%s\n", ImageResult);
 }
 int main()
 {
-	char Api_Key[] = "942f4dea3b45def10552360de80dd17a";
-	char Api_Secret[] = "282e42c53058b0b08253e60cad0746c2";
-	char Image_Url[] = "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=444806911,2342807153&fm=23&gp=0.jpg";
-	char service_name[] = "objects";
-	char PATH[1024] = "object3.jpg";
-	SKEyeSDK_Init(Api_Key, Api_Secret);
-	SKEyeSDK_ImagePath_Function(PATH, service_name);
-	SKEyeSDK_ImagePath_CallBackFunction(PATH, service_name);
-	SKEyeSDK_Image_Function( 640, 480, service_name);
-	SKEyeSDK_Image_CallBackFunction(640, 480, service_name);
+	//SKEyeSDK_Init()初始化函数只初始化一次(不允许初始化多次)  将ApiKey和ApiSecret放入初始化函数内
+	char ApiKey[] = "466da4221010f834191e2da500b4a23b";
+	char ApiSecret[] = "ddc8bd498e7c29f929862ab7391a7b89";
+	SKEyeSDK_Init(ApiKey, ApiSecret);
+	//本地路径Demo
+	LocalDemoFuntion();
+	//Url Demo
+	UrlDemoFuntion();
+	//图像识别Demo
+	ImageDemoFuntion();
+	//本地路径回调Demo
+	LocalCallBackDemoFuntion();
+	//Url回调Demo
+	UrlCallBackDemoFuntion();
+	//图像识别回调Demo
+	ImageCallBackDemoFuntion();
 	system("pause");
 	return 0;
 }
