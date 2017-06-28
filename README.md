@@ -12,7 +12,7 @@ v1.0.0
 ###  目录介绍
 - libs:include包含的头文件,x64、x86下的lib、dll文件以及demo用到cximage图像提取的库。
 - SKEyeSDKDemo:物体识别的demo(main.cpp)、资源文件resources(包含demo的图片)。
-- 说明文档[《SKEye-Windows-SDK说明文档V1.0.2.pdf》](https://github.com/interjoy/SKEye-Windows-SDK/blob/master/SKEye-Windows-SDK%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3V1.0.2.pdf)
+- 说明文档[《SKEye-Windows-SDK说明文档V1.0.2》](https://github.com/interjoy/SKEye-Windows-SDK/blob/master/SKEye-Windows-SDK%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3V1.0.2.pdf)
 ###  使用步骤
 - 下载SDK文件包。
 - 将x64或x86下的lib、dll文件加载到vs工程下，并包含头文件"LibFile.h"。
