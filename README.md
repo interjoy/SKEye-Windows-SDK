@@ -1,6 +1,9 @@
 # SKEye-Windows-SDK
 SKEye-Windows-SDK for Object Recognition Service 
 ###  更新日志
+v1.0.3
+- 优化网络
+
 v1.0.2
 - 修改优化物体识别结果内存分配问题及Demo的修改
 
