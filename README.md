@@ -1,6 +1,9 @@
 # SKEye-Windows-SDK
 SKEye-Windows-SDK for Object Recognition Service 
 ###  更新日志
+v1.0.4
+- 扩充图像识别接口，加入ImageId参数，方便确认请求顺序和返回顺序是否一致
+
 v1.0.3
 - 优化网络
 
@@ -15,13 +18,13 @@ v1.0.0
 ###  目录介绍
 - libs:include包含的头文件,x64、x86下的lib、dll文件以及demo用到cximage图像提取的库。
 - SKEyeSDKDemo:物体识别的demo(main.cpp)、资源文件resources(包含demo的图片)。
-- 说明文档[《SKEye-Windows-SDK说明文档V1.0.2》](https://github.com/interjoy/SKEye-Windows-SDK/blob/master/SKEye-Windows-SDK%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3V1.0.2.pdf)
+- 说明文档[《SKEye-Windows-SDK说明文档V1.0.3.pdf》](https://github.com/interjoy/SKEye-Windows-SDK/blob/master/SKEye-Windows-SDK%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3V1.0.3.pdf)
 ###  使用步骤
 - 下载SDK文件包。
 - 将x64或x86下的lib、dll文件加载到vs工程下，并包含头文件"LibFile.h"。
 - 将资源文件resources下的图片放入对应的路径下。
 - 运行代码。
-- 更多使用介绍请参考 [《SKEye-Windows-SDK说明文档V1.0.2》](https://github.com/interjoy/SKEye-Windows-SDK/blob/master/SKEye-Windows-SDK%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3V1.0.2.pdf)。
+- 更多使用介绍请参考 [《SKEye-Windows-SDK说明文档V1.0.3》](https://github.com/interjoy/SKEye-Windows-SDK/blob/master/SKEye-Windows-SDK%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3V1.0.3.pdf)。
 ###  调用示例
 ```
 //图片结果回调函数
@@ -83,7 +86,16 @@ void LocalCallBackDemoFuntion()
 	char ServiceName[] = "objects";
 	SKEyeSDK_ImagePath(ImageLocalPath, ServiceName, CallBackImageResultFunction);
 }
-
+//本地路径回调Demo+ImageId
+void LocalCallBackDemoFuntion_ImageId()
+{
+    //Image的本地绝对路径
+	char ImageLocalPath[] = "object3.jpg";
+	int ImageId=0;
+	//服务名
+	char ServiceName[] = "objects";
+	SKEyeSDK_ImagePath(ImageId,ImageLocalPath, ServiceName, CallBackImageResultFunction);
+}
 //本地路径Demo
 void LocalDemoFuntion()
 {
@@ -136,6 +148,8 @@ int main()
 	ImageDemoFuntion();
 	//本地路径回调Demo
 	LocalCallBackDemoFuntion();
+	//本地路径回调Demo+ImageId
+	LocalCallBackDemoFuntion_ImageId();
 	//Url回调Demo
 	UrlCallBackDemoFuntion();
 	//图像识别回调Demo
